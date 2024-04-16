@@ -1,0 +1,55 @@
+<!-- Contenu -->
+<div class="container">
+    <div id="alertMsg">
+      <p>
+        {{ message }}
+      </p>
+    </div>
+  
+  
+  
+  <div id="home" class="container">
+      <app-article 
+        *ngFor="let element of liste"
+        [titreArticle]="element.titreArticle" 
+        [prixArticle]="element.prixArticle" 
+        [description]="element.description" 
+        [urlImg]="element.urlImg"  
+        [textAltImg]="element.textAltImg" 
+        [dispo]="element.dispo" 
+        [idArticle]="element.id"
+        (info)="onAffiche($event)">
+    </app-article>
+  <!--
+    <app-article 
+      [titreArticle]="'TV'" 
+      [prixArticle]="200" 
+      [description]="'Super TV écran plat'" 
+      [urlImg]="'https://dummyimage.com/400x250/808080/fff'"  
+      [textAltImg]="'Une télévision'" 
+      [dispo]="true" 
+      (info)="onAffiche($event)">
+    </app-article>
+  
+    <app-article 
+      [titreArticle]="'Vélo'" 
+      [prixArticle]="80" 
+      [description]="'Un super vélo tout terrain'" 
+      [urlImg]="'https://dummyimage.com/400x250/808080/fff'" 
+      [textAltImg]="'Un vélo'" 
+      [dispo]="false" 
+      (info)="onAffiche($event)">
+    </app-article>
+  
+    <app-article 
+      [titreArticle]="'Jouet'" 
+      [prixArticle]="20" 
+      [description]="'Jouet pour enfant'" 
+      [urlImg]="'https://dummyimage.com/400x250/808080/fff'" 
+      [textAltImg]="'Un jouet'" 
+      [dispo]="true" 
+      (info)="onAffiche($event)">
+    </app-article>
+  -->
+  </div>
+  

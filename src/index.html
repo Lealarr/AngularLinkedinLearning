@@ -9,5 +9,54 @@
 </head>
 <body>
   <app-root></app-root>
+  <tl-grid-filter-container (applyFilter)="context.applyFilter({filterPredicate: filterDescriptionColumn.bind(this)})"
+            (resetFilter)="context.resetFilter();resetStoredFilter([ColumnEnum.pn,ColumnEnum.sn,ColumnEnum.designation])">
+            <div class="match">
+              <input type="checkbox" value="match_description" (change)="changeValueCheckbox('description')" [checked]="filter_exact_match.description"/>
+              <label class="tl-round-label"> {{ "Exact match" | translate }}</label>
+            </div>
+            <div class="d-flex flex-wrap j-c-between">
+              <div style="width: 48%">
+                <label class="tl-round-label">P/N</label>
+                <input type="text" class="tl-round-input form-control" [(ngModel)]="filter_pn"
+                  (change)="updateStoredFilter(ColumnEnum.pn);" />
+              </div>
+              <div style="width: 48%">
+                <label class="tl-round-label">S/N</label>
+                <input type="text" class="tl-round-input form-control" [(ngModel)]="filter_sn"
+                  (change)="updateStoredFilter(ColumnEnum.sn);" />
+              </div>
+              <div class="m-t-8 flex-1 m-b-8">
+                <label class="tl-round-label">{{'Designation'|translate}}</label>
+                <input type="text" class="tl-round-input form-control" [(ngModel)]="filter_designation"
+                  (change)="updateStoredFilter(ColumnEnum.designation);" />
+              </div>
+            </div>
+          </tl-grid-filter-container>
+
+<p>STATUT</p>
+          <tl-grid-filter-container
+          (applyFilter)="context.applyFilter({filterPredicate: applyServiceabilityColumnFilter.bind(this)});updateStoredFilter(ColumnEnum.serviceabilityDate)"
+          (resetFilter)="context.resetFilter();resetStoredFilter([ColumnEnum.serviceability,ColumnEnum.serviceabilityDate]);updateButtonsColors();manageComplDataVisibility(null)">
+          <div class="p-8">
+            <div class="d-flex m-t-8">
+              <div style="min-width: 250px;">
+                <div *ngFor="let status of filter_serviceability" style="padding: 8px 0; flex: 0 0 33%;">
+                  <label class="c8y-checkbox" style="display: flex;align-items: center;">
+                    <input type="checkbox" [(ngModel)]="status.checked"
+                      (change)="updateStoredFilter(ColumnEnum.serviceability)" />
+                    <span></span>
+                    <span> {{ status.label | translate }}</span>
+                  </label>
+                </div>
+              </div>
+              <div class="form-inline">
+                <tl-grid-filter-date #statusDateFilter [datesInterval]="filter_serviceabilityDate"
+                  [columnIndex]="ColumnEnum.serviceabilityDate" [displayFormButtons]="false">
+                </tl-grid-filter-date>
+              </div>
+            </div>
+          </div>
+        </tl-grid-filter-container>
 </body>
 </html>
